@@ -13,15 +13,15 @@ jobs:
       - run: docker build -t cygnetops/react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true cygnetops/react-test npm test
 
-      - run: docker build -t cygnetops/multi-client-10-14 ./client
-      - run: docker build -t cygnetops/multi-nginx-10-14 ./nginx
-      - run: docker build -t cygnetops/multi-server-10-14 ./server
-      - run: docker build -t cygnetops/multi-worker-10-14 ./worker
+      - run: docker build -t cygnetops/multi-client-2-9 ./client
+      - run: docker build -t cygnetops/multi-nginx-2-9 ./nginx
+      - run: docker build -t cygnetops/multi-server-2-9 ./server
+      - run: docker build -t cygnetops/multi-worker-2-9 ./worker
 
-      - run: docker push cygnetops/multi-client-10-14
-      - run: docker push cygnetops/multi-nginx-10-14
-      - run: docker push cygnetops/multi-server-10-14
-      - run: docker push cygnetops/multi-worker-10-14
+      - run: docker push cygnetops/multi-client-2-9
+      - run: docker push cygnetops/multi-nginx-2-9
+      - run: docker push cygnetops/multi-server-2-9
+      - run: docker push cygnetops/multi-worker-2-9
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
@@ -31,8 +31,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: multi2
-          environment_name: Multi2-env
+          application_name: multi-docker
+          environment_name: Multi-docker-env
           existing_bucket_name: elasticbeanstalk-eu-north-1-923445559289
           region: eu-north-1
           version_label: ${{ github.sha }}
